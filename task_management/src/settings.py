@@ -37,9 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'home'
+    'home.apps.HomeConfig',
+    'account.apps.AccountConfig',
 ]
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -51,7 +51,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'src.urls'
-STATIC_URL = "static/"
 
 TEMPLATES = [
     {
