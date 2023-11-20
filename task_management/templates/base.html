@@ -1,14 +1,48 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  {% load static %}
+  
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="{% static 'image/company_logo.jpg' %}">
+  <link rel="icon" href={% static 'image/company_logo.png' %}>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href={% static 'css/style.css' %}>
   <title>{% block title %} {% endblock %}</title>
 </head>
+<header>
+    <div class="container-fluid">
+        <div class="nav_belt">
+            <div class="row align-items-center">
+                <div class="col-lg-2 col-md-2 col-sm-3 col-6 ">
+                   <img src={% static 'image/company_logo.png' %} class="img" alt="logo Image">
+                </div>
+                {% comment %} <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
+                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="../Main.html"><b>Adacompany</b></a>
+                </div> {% endcomment %}
+                <div class="col-lg-1 col-md-2 col-sm-3 col-12 menu-icon">
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  MENU
+                  </button>
+                        <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button">Action</button>
+                            <button class="dropdown-item" type="button">Another action</button>
+                            <button class="dropdown-item" type="button">Something else here</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+                    <input type="text" class="form-control search-box" placeholder=" Search Ada company ...">
+                </div>
+                <div class="col-lg-2 col-md-2 col-sm-3 col-12">
+                    <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none"href="{% url 'account:User_register' %}" type="submit" target="_blank">Sign In</a></button>
+                </div>
+            </div>
+        </div>
+</header>
 <body>
+
   {% include "include/messages.html" %}
   {% block content %}
   {% endblock %}
