@@ -42,10 +42,24 @@
         </div>
 </header>
 <body>
-
-  {% include "include/messages.html" %}
-  {% block content %}
-  {% endblock %}
+    <div class="container mt-4">
+      {% include "include/messages.html" %}
+      {% block content %}
+      {% endblock %}
+    </div>
+    
+    <div class="footer">
+      <div class="social-icons">
+        <a href="https://www.instagram.com/digikalacom/?utm_source=aboutdk_home&utm_medium=web&utm_campaign=refactor" target="_blank"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/company/digikala/?originalSubdomain=ir" target="_blank"><i class="fab fa-linkedin"></i></a>
+      </div>
+      <p style="margin-top: 1rem;">&copy; 2023 To use the contents of the website about the webazon group, it is enough to have a "non-commercial purpose" and mention the "source".</p>
+      <p>&copy;All the rights of this website belong to WEBAZON e-commerce group company.</p>
+    </div>
+    
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 
 </body>
 </html>
