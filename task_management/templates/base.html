@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" href={% static 'image/company_logo.png' %}>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href={% static 'css/style.css' %}>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
   <title>{% block title %} {% endblock %}</title>
 </head>
 <header>
@@ -15,10 +15,10 @@
         <div class="nav_belt">
             <div class="row align-items-center">
                 <div class="col-lg-2 col-md-2 col-sm-3 col-6 ">
-                   <img src={% static 'image/company_logo.png' %} class="img" alt="logo Image">
+                   <img src={% static 'image/company_logo.png' %}  alt = "logo Image">
                 </div>
                 {% comment %} <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
-                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="../Main.html"><b>Adacompany</b></a>
+                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="../Main.html"><b>Ada company</b></a>
                 </div> {% endcomment %}
                 <div class="col-lg-1 col-md-2 col-sm-3 col-12 menu-icon">
                     <div class="dropdown">
@@ -35,9 +35,21 @@
                 <div class="col-lg-6 col-md-6 col-sm-6 col-12">
                     <input type="text" class="form-control search-box" placeholder=" Search Ada company ...">
                 </div>
-                <div class="col-lg-2 col-md-2 col-sm-3 col-12">
-                    <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none"href="{% url 'account:User_register' %}" type="submit" target="_blank">Sign In</a></button>
-                </div>
+                {% if user.is_authenticated %}
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-12">
+                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="" type="submit" target="_self">profile</a></button>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="{% url 'account:User_logout' %}" type="submit" target="_self">log out</a></button>
+                    </div>
+                {% else %}
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-12">
+                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="{% url 'account:User_register' %}" type="submit" target="_self">register</a></button>
+                    </div>
+                    <div class="col-lg-2 col-md-2 col-sm-3 col-6">
+                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="{% url 'account:User_login' %}" type="submit" target="_self">log in</a></button>
+                    </div>
+                {% endif %}
             </div>
         </div>
 </header>
@@ -48,13 +60,13 @@
       {% endblock %}
     </div>
     
-    <div class="footer">
+    <div class="footer col-md-12 mb-12 m-0">
       <div class="social-icons">
         <a href="https://www.instagram.com/digikalacom/?utm_source=aboutdk_home&utm_medium=web&utm_campaign=refactor" target="_blank"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/company/digikala/?originalSubdomain=ir" target="_blank"><i class="fab fa-linkedin"></i></a>
       </div>
-      <p style="margin-top: 1rem;">&copy; 2023 To use the contents of the website about the webazon group, it is enough to have a "non-commercial purpose" and mention the "source".</p>
-      <p>&copy;All the rights of this website belong to WEBAZON e-commerce group company.</p>
+      <p style="margin-top: 1rem;">&copy; 2023 To use the contents of the website about the Ada group, it is enough to have a "non-commercial purpose" and mention the "source".</p>
+      <p>&copy;All the rights of this website belong to Ada e-commerce group company.</p>
     </div>
     
       <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>

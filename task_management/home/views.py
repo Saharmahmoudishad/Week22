@@ -7,8 +7,8 @@ from .models import Category
 class HomeView(View):
     def get(self, request):
         # allcategory=Category.objects.values_list('title', flat=True).distinct()
-        allcategory=Category.objects.all()
-        return render(request, 'home/home.html',{"allcategory":allcategory})
+        allcategory = Category.objects.all()
+        return render(request, 'home/home.html', {"allcategory": allcategory})
 
     def post(self, request):
         return render(request, 'home/home.html')

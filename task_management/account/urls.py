@@ -1,6 +1,10 @@
 from django.urls import path
+from django.contrib.auth.forms import AuthenticationForm
 from . import views
-app_name='account'
+
+app_name = 'account'
 urlpatterns = [
-    path('register/', views.RegisterView.as_view(), name='User_register'),
+    path('register/', views.UserRegisterView.as_view(), name='User_register'),
+    path('login/', views.UserLoginView.as_view(), name='User_login'),
+    path('logout/', views.UserLogoutView.as_view(), name='User_logout'),
 ]
