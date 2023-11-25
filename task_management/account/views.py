@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.views import View
 from .forms import UserRegisterForm, UserLoginForm
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from account.models import CustomUser
 
 
 # Create your views here.
@@ -25,7 +26,13 @@ class UserRegisterView(View):
         form = self.form_user(request.POST)
         if form.is_valid():
             datas = form.cleaned_data
-            User.objects.create_user(datas["username"], datas["password"], datas["email"])
+            CustomUser.objects.create_user(
+                nationalcode=datas["nationalcode"],
+                email=datas["email"],
+                date_of_birth=datas["date_of_birth"],
+                adress=datas["adress"],
+                password=datas["password"]
+            )
             messages.success(request, "your registered successfully", "success")
             return redirect('account:User_register')
         return render(request, self.template_name, {'form': form})
@@ -48,10 +55,10 @@ class UserLoginView(View):
         log = self.form_login(request.POST)
         if log.is_valid():
             datas = log.cleaned_data
-            user = authenticate(request, username=datas["username"], password=datas["password"])
+            user = authenticate(request, username=datas["nationalcode"], password=datas["password"])
             if user is not None:
                 login(request, user)
-                messages.success(request, f"welcome to Ada company {datas['username']}", "success")
+                messages.success(request, f"welcome to Ada company {datas['nationalcode']}", "success")
                 return redirect('home:home')
             messages.warning(request, f"Please register in Ada company sit", "warning")
         return self.get(request)
