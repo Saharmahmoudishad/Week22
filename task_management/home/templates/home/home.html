@@ -8,7 +8,7 @@
 {% for category in allcategory %}
     <div class="col-md-6 mb-6">
       <div class="card">
-        <img src={% static 'image/'|add:category.title|add:'.jpg' %} class="card-img-top p-2" alt="category Image"> 
+        <img src={% static 'image/'|add:category.title|add:'.jpg' %} class="card-img-top p-2 img-fluid" alt="category Image"> 
         <div class="card-body  text-center">
           <h5 class="card-title">{{category.title}}</h5>
         </div>

@@ -18,6 +18,8 @@ class UserRegisterForm(forms.Form):
     password2 = forms.CharField(label="confirm password", widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "specialscolor"}),
                              help_text="Please enter a valid email address.", )
+    # nationalcode = forms.IntegerField(help_text="Please enter a valid NationalCode")
+    # adress = forms.CharField(widget=forms.Textarea(attrs={"class": "specialscolor"}))
 
     # validators = [UnicodeUsernameValidator()],
 
@@ -34,6 +36,15 @@ class UserRegisterForm(forms.Form):
         except ValidationError:
             self.add_error("email", "Invalid email format")
         return email_input
+    
+    def clean_nationalcode(self):
+        nationalcode =self.cleaned_data["nationalcode"]
+        if nationalcode:
+            user = User.objects.filter(nationalcode=nationalcode).exists()
+            if user:
+                self.add_error("username", "this username is already exists")
+            return nationalcode
+        return "plese enter your national code"
 
     def clean_username(self):
         username = self.cleaned_data["username"]
