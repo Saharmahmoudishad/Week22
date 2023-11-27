@@ -14,7 +14,7 @@ class UserRegisterForm(forms.Form):
     #                            error_messages={
     #                                'unique': "A user with that username already exists.",
     #                            }, )
-    nationalcode = forms.IntegerField(help_text="Please enter a valid NationalCode")
+    nationalcode = forms.CharField(help_text="Please enter a valid NationalCode")
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
     password2 = forms.CharField(label="confirm password", widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "specialscolor"}),
@@ -44,7 +44,7 @@ class UserRegisterForm(forms.Form):
         if nationalcode:
             user = CustomUser.objects.filter(nationalcode=nationalcode).exists()
             if user:
-                self.add_error("username", "this username is already exists")
+                self.add_error("nationalcode", "this user is already exists")
             return nationalcode
         return "plese enter your national code"
 
@@ -64,7 +64,7 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
-    nationalcode = forms.IntegerField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off"}))
+    nationalcode = forms.CharField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off"}),help_text="Please enter a valid nationalcode of email address.")
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor", "autocomplete": "off"}),
                                help_text="forgot your "
                                          "password", )

@@ -1,14 +1,9 @@
 from django.db import models
+
+# Create your models here.
+from django.db import models
 from django.apps import apps
 from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
-# # Create your models here.
-# class CustomUser(AbstractUser):
-#     nationalcode=models.IntegerField(unique=True,default=1234)
-#     adress=models.TextField()
-
-#     USERNAME_FIELD="nationalcode"
-#     REQUIRED_FIELDS=[]
-
 
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
@@ -69,7 +64,7 @@ class CustomUser(AbstractBaseUser):
     REQUIRED_FIELDS = ["email"]
 
     def __str__(self):
-        return self.email
+        return f"{self.email}_{self.nationalcode}" 
 
     def has_perm(self, perm, obj=None):
         "Does the user have a specific permission?"
@@ -86,5 +81,9 @@ class CustomUser(AbstractBaseUser):
         "Is the user a member of staff?"
         # Simplest possible answer: All admins are staff
         return self.is_admin
-
+    
+class LoginRecord(models.Model):
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    login_time = models.DateTimeField(auto_now_add=True)
+    login_count = models.PositiveIntegerField(default=0)
     

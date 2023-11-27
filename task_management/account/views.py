@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
+from django.urls import reverse
 from django.views import View
 from .forms import UserRegisterForm, UserLoginForm
-# from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from account.models import CustomUser
+from django.http import HttpResponseRedirect
+import hashlib
 
 
 # Create your views here.
@@ -58,14 +60,28 @@ class UserLoginView(View):
             user = authenticate(request, username=datas["nationalcode"], password=datas["password"])
             if user is not None:
                 login(request, user)
-                messages.success(request, f"welcome to Ada company {datas['nationalcode']}", "success")
-                return redirect('home:home')
-            messages.warning(request, f"Please register in Ada company sit", "warning")
+                return self.setcookie(request,datas["nationalcode"])
+        messages.warning(request, f"Please enter correct nationalcode or email and password or Please register in Ada company site first before login", "warning")
         return self.get(request)
-
+    
+    @staticmethod
+    def setcookie(request,name):
+        hashed_name = hashlib.sha256(name.encode()).hexdigest()
+        url=reverse("home:home")
+        html = HttpResponseRedirect(url)
+        if request.COOKIES.get(hashed_name):
+            value = int(request.COOKIES.get(hashed_name))
+            html.set_cookie(hashed_name, value + 1, max_age=84600)
+            messages.success(request, f"welcome back to Ada company {name}", "success")
+        else:
+            value = 1
+            html.set_cookie(hashed_name, value,max_age=84600)
+            messages.success(request, f"welcome to Ada company {name} for first time", "success")
+        return html
 
 class UserLogoutView(LoginRequiredMixin,View):
     def get(self, request):
         logout(request)
         messages.success(request, "you log out successfully ", "success")
         return redirect("home:home")
+

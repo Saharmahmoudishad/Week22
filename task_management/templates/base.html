@@ -14,12 +14,10 @@
     <div class="container-fluid">
         <div class="nav_belt">
             <div class="row align-items-center">
-                <div class="col-lg-2 col-md-2 col-sm-3 col-6 ">
-                   <a href="{% url 'home:home' %}"><img src={% static 'image/company_logo.png' %}  alt = "logo Image"></a>
-                </div>
-                {% comment %} <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
-                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="../Main.html"><b>Ada company</b></a>
-                </div> {% endcomment %}
+                <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
+                   <img src={% static 'image/company_logo.png' %}  alt = "logo Image">
+                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="{% url 'home:home' %}" ><b>Ada company</b></a>
+                </div> 
                 <div class="col-lg-1 col-md-2 col-sm-3 col-12 menu-icon">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
