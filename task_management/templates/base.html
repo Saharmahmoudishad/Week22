@@ -14,21 +14,19 @@
     <div class="container-fluid">
         <div class="nav_belt">
             <div class="row align-items-center">
-                <div class="col-lg-2 col-md-2 col-sm-3 col-6 ">
+                <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
                    <img src={% static 'image/company_logo.png' %}  alt = "logo Image">
-                </div>
-                {% comment %} <div class="company-logo col-lg-2 col-md-2 col-sm-3 col-6 ">
-                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="../Main.html"><b>Ada company</b></a>
-                </div> {% endcomment %}
+                    <a style="color:whitesmoke; font-family: cursive; text-decoration:none;" href="{% url 'home:home' %}" ><b>Ada company</b></a>
+                </div> 
                 <div class="col-lg-1 col-md-2 col-sm-3 col-12 menu-icon">
                     <div class="dropdown">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   MENU
                   </button>
                         <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
-                            <button class="dropdown-item" type="button">Action</button>
-                            <button class="dropdown-item" type="button">Another action</button>
-                            <button class="dropdown-item" type="button"><a style="color:black; text-decoration:none" href="{% url 'account:User_logout' %}" type="submit" target="_self">User_logout</a></button>
+                            <button class="dropdown-item" type="button">about us</button>
+                            <button class="dropdown-item" type="button">contact us</button>
+                            <button class="dropdown-item" type="button"><a style="color:black; text-decoration:none" href="{% url 'account:User_logout' %}" type="submit" target="_self">User Logout</a></button>
                         </div>
                     </div>
                 </div>

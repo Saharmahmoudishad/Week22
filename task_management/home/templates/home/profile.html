@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block title %} login{% endblock %}
+{% block content %}
+ <div class="row-form m-2 p-2">
+     <div class="col-md-6">
+         <h2 class="m-3 text-white">login form</h2>
+         <form action="" method="post" novalidate autocomplete="off">
+             {% csrf_token %}
+             <div class="form-group">
+                 {{ form.firstname.label_tag }}
+                 {{ form.firstname }}
+             </div>
+             <div class="form-group">
+                 {{ form.lastname.label_tag }}
+                 {{ form.lastname}}
+             </div>
+             <div class="form-group">
+                 {{ form.expert.label_tag }}
+                 {{ form.expert}}
+             </div>
+             <div class="form-group">
+                 {{ form.experience.label_tag }}
+                 {{ form.experience}}
+             </div>
+             <div class="form-group">
+                 {{ form.user.label_tag }}
+                 {{ form.user}}
+             </div>
+             <div class="form-group">
+                 {{ form.categories.label_tag }}
+                 {{ form.categories}}
+             </div>
+             <a href="{% url 'account:User_login' %}" class="sing_up_sign_in" target="_self">
+             <button type="submit" class="btn btn-primary btn-sm btn-block" style="max-width: 100px;">update</button>
+             </a>
+         </form>
+     </div>
+ </div>
+{% endblock %}
