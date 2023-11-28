@@ -11,6 +11,9 @@
             <h5 class="card-title">{{ staff_member.firstname }} {{ staff_member.lastname }}</h5>
             <p class="card-text">Expertise: {{ staff_member.expert }}</p>
             <p class="card-text">Experience: {{ staff_member.experience }} years</p>
+            {% if user.is_authenticated and user.id == staff_member.user.id %}
+            <button type="button" class="btn btn-light"><a href="{% url 'home:staffdetail' staff_member.user.id %}">detail</a></button>
+            {% endif %}
           </div>
         </div>
       </div>

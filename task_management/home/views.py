@@ -25,8 +25,8 @@ class StaffProfileView(View):
         if request.method=='GET':
            if request.user.is_authenticated:
             user_id=request.user.id
-            return self.get (request,user_id,show=True)
-        return super().dispatch(request, *args, **kwargs)
+            return self.get(request,user_id,show=True)
+        return self.get(request,user_id,show=False)
 
     def get(self, request, user_id , show):
         if show ==True:
@@ -61,6 +61,7 @@ class CategoryDetailView(View):
         context = {
             'category_name': category.title,
             'staffs': staffs,
+            'user': request.user
         }
         return render(request, 'home/categorydetail.html', context)
 
