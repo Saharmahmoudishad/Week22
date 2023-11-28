@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ category_name }} {% endblock %}
+{% block content %}
+  <h1 class="card text-center mx-auto">{{ category_name }}</h1>
+  <div class="row">
+    {% for staff_member in staffs %}
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{ staff_member.firstname }} {{ staff_member.lastname }}</h5>
+            <p class="card-text">Expertise: {{ staff_member.expert }}</p>
+            <p class="card-text">Experience: {{ staff_member.experience }} years</p>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% endblock %}
+
+
+
+

@@ -1,6 +1,7 @@
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import Category,Staff
+from account.models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .forms import StaffForm
@@ -20,23 +21,47 @@ class StaffProfileView(View):
     staff_form=StaffForm
     template_name="home/staffprofile.html"
     
-    def get(self, request, user_id):
-        staff=Staff.objects.get(user_id=user_id)
-        form=StaffForm(instance=staff)
-        return render(request,self.template_name,{'form':form})
+    def dispatch(self, request, *args, **kwargs):
+        if request.method=='GET':
+           if request.user.is_authenticated:
+            user_id=request.user.id
+            return self.get (request,user_id,show=True)
+        return super().dispatch(request, *args, **kwargs)
+
+    def get(self, request, user_id , show):
+        if show ==True:
+           user= CustomUser.objects.get(id=user_id)
+           staff = Staff.objects.get(user_id=user_id)
+           context = {
+            'user': user,
+            'staff': staff,
+           }
+           return render(request,"home/staffdetail.html",context)
+        else:
+            staff=Staff.objects.get(user_id=user_id)
+            form=StaffForm(instance=staff)
+            return render(request,self.template_name,{'form':form})
 
     def post(self, request,user_id):
         staff=Staff.objects.get(user_id=user_id)
         staff_form = self.staff_form(request.POST,instance=staff)
         if staff_form.is_valid():
-            print(1)
             staff_form.save()
-            print(1)
             messages.success(request, f"update successfully", "success")
             return redirect("home:home")
         else:
             messages.warning(request,"check your input data","warning")
 
 
-            
+class CategoryDetailView(View):
+    
+    def get(self, request,title):
+        category = Category.objects.get(title=title)
+        staffs = Staff.objects.filter(categories=category)
+        context = {
+            'category_name': category.title,
+            'staffs': staffs,
+        }
+        return render(request, 'home/categorydetail.html', context)
+
 

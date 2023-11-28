@@ -37,7 +37,7 @@
                 </div>
                 {% if user.is_authenticated %}
                     <div class="col-lg-2 col-md-2 col-sm-3 col-12">
-                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="" type="submit" target="_self">profile</a></button>
+                       <button type="button" class="btn btn-light"><a style="color:black; text-decoration:none" href="{% url 'home:staffdetail' user.id %}" type="submit" target="_self">profile</a></button>
                     </div>
                 {% else %}
                     <div class="col-lg-2 col-md-2 col-sm-3 col-6">

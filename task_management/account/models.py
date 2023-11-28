@@ -1,12 +1,10 @@
+from django.apps import apps
 from django.db import models
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser,PermissionsMixin
 
 # Create your models here.
-from django.db import models
-from django.apps import apps
-from django.contrib.auth.models import AbstractBaseUser,BaseUserManager
 
-from django.db import models
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser
+
 
 
 class MyUserManager(BaseUserManager):
@@ -66,21 +64,39 @@ class CustomUser(AbstractBaseUser):
     def __str__(self):
         return f"{self.email}_{self.nationalcode}" 
 
-    def has_perm(self, perm, obj=None):
-        "Does the user have a specific permission?"
-        # Simplest possible answer: Yes, always
-        return True
+    # def has_perm(self, perm, obj=None):
+    #     "Does the user have a specific permission?"
+    #     # Simplest possible answer: Yes, always
+    #     return True
 
-    def has_module_perms(self, app_label):
-        "Does the user have permissions to view the app `app_label`?"
-        # Simplest possible answer: Yes, always
-        return True
+    # def has_module_perms(self, app_label):
+    #     "Does the user have permissions to view the app `app_label`?"
+    #     # Simplest possible answer: Yes, always
+    #     return True
 
-    @property
-    def is_staff(self):
-        "Is the user a member of staff?"
-        # Simplest possible answer: All admins are staff
-        return self.is_admin
+    # @property
+    # def is_staff(self):
+    #     "Is the user a member of staff?"
+    #     # Simplest possible answer: All admins are staff
+    #     return self.is_admin
+    def has_category_permission(self, target_user):
+
+        if not self.is_active or self.is_anonymous:
+            return False
+
+        user_category = self.staff.categories.title.lower()
+        target_user_category = target_user.staff.categories.title.lower()
+
+        if user_category == "project management":
+            # Project Management category has access to all staff profiles
+            return True
+        elif user_category == "data processing":
+            # Data Processing category has access to Survey Operations profiles only
+            return target_user_category == "survey operations"
+        elif user_category == "research and development":
+            # Research and Development has access to Data Processing and Survey Operations profiles
+            return target_user_category in ["data processing", "survey operations"]
+        return False
     
 class LoginRecord(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)

@@ -49,6 +49,7 @@ background-color: #555657;
 }
 
 .card {
+  font-family: 'Times New Roman', Times, serif;
   background-color: #555657;
   color: #000000 ; 
   margin-top: 40px;
@@ -59,6 +60,9 @@ background-color: #555657;
   margin:auto ;
   max-width: 350px;
   max-height: 250px;
+}
+.bg-taupe {
+  background-color:rgb(79, 100, 103) ;
 }
 
 .footer {
