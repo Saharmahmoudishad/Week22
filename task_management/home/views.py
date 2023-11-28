@@ -16,17 +16,22 @@ class HomeView(View):
     def post(self, request):
         return render(request, 'home/home.html')
     
-class StaffProfileView(LoginRequiredMixin,View):
+class StaffProfileView(View):
     staff_form=StaffForm
+    template_name="home/staffprofile.html"
+    
     def get(self, request, user_id):
-        staff=Staff.objects.get(id=user_id)
+        staff=Staff.objects.get(user_id=user_id)
         form=StaffForm(instance=staff)
-        return render(request,"home:staffprofile",{'form':form})
+        return render(request,self.template_name,{'form':form})
 
     def post(self, request,user_id):
-        staff_form = self.staff_form(request.POST)
+        staff=Staff.objects.get(user_id=user_id)
+        staff_form = self.staff_form(request.POST,instance=staff)
         if staff_form.is_valid():
+            print(1)
             staff_form.save()
+            print(1)
             messages.success(request, f"update successfully", "success")
             return redirect("home:home")
         else:

@@ -28,7 +28,7 @@ class UserRegisterView(View):
         form = self.form_user(request.POST)
         if form.is_valid():
             datas = form.cleaned_data
-            CustomUser.objects.create_user(
+            new_user= CustomUser.objects.create_user(
                 nationalcode=datas["nationalcode"],
                 email=datas["email"],
                 date_of_birth=datas["date_of_birth"],
@@ -36,7 +36,9 @@ class UserRegisterView(View):
                 password=datas["password"]
             )
             messages.success(request, "your registered successfully", "success")
-            return redirect('account:User_register')
+            user_id=new_user.id
+            staffprofile_url = reverse('home:staffprofile', args=[user_id])
+            return redirect( staffprofile_url)
         return render(request, self.template_name, {'form': form})
 
 
