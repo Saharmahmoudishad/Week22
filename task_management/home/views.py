@@ -29,7 +29,7 @@ class StaffPdetailView(View):
         if request.user.is_authenticated:
             user_id=request.user.id
             return self.get(request,user_id)
-        return super().dispatch(request, *args, **kwargs)
+        return super().dispatch(request,user_id=None, *args, **kwargs)
 
     
     def get(self, request, user_id):
@@ -41,6 +41,8 @@ class StaffPdetailView(View):
              'staff': staff,
             }
             return render(request,self.template_name,context)
+        else:
+            return redirect('home:home')
         messages.warning(request,"your not access to staff of Ada company profile","warning")
 
         
