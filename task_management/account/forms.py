@@ -64,7 +64,7 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
-    nationalcode = forms.CharField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off"}),help_text="Please enter a valid nationalcode of email address.",label='National Code or Email Adress')
-    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor", "autocomplete": "off"}),
+    nationalcode = forms.CharField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off",'placeholder':'Enter your nationalcode or email'}),help_text="Please enter a valid nationalcode of email address.",label='National Code or Email Adress')
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor", "autocomplete": "off",'placeholder':'Enter your password'}),
                                help_text="forgot your "
                                          "password", )
