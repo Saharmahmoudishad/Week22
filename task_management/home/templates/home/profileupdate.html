@@ -2,36 +2,36 @@
 {% block title %} login{% endblock %}
 {% block content %}
  <div class="row-form m-2 p-2">
-     <div class="card border-primary text-center col-md-8">
-         <h3 class="card border-primary m-3 text-white" style="background-color: #032a5d;">Please fill in the blank of profile form </h3>
-         <form action="" method="post" novalidate autocomplete="off">
-             {% csrf_token %}
-             <div class="form-group">
-                 {{ form.firstname.label_tag }}
-                 {{ form.firstname }}
-             </div>
-             <div class="form-group">
-                 {{ form.lastname.label_tag }}
-                 {{ form.lastname}}
-             </div>
-             <div class="form-group">
-                 {{ form.expert.label_tag }}
-                 {{ form.expert}}
-             </div>
-             <div class="form-group">
-                 {{ form.experience.label_tag }}
-                 {{ form.experience}}
-             </div>
-             <div class="form-group">
-                 {{ form.user.label_tag }}
-                 {{ form.user}}
-             </div>
-             <div class="form-group">
-                 {{ form.categories.label_tag }}
-                 {{ form.categories}}
-             </div>
-             <button type="submit" class="btn btn-dark text-white" style="max-width: 100px;"><a href="{% url 'account:User_login' %}" target="_self">update</a></button> 
-         </form>
-     </div>
+    <div class="card border-primary text-center col-md-8">
+        <h3 class="card border-primary m-3 text-white" style="background-color: #032a5d;">Please fill in the blank of profile form </h3>
+        <form method="post" novalidate autocomplete="off">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.firstname.label_tag }}
+                {{ form.firstname }}
+            </div>
+            <div class="form-group">
+                {{ form.lastname.label_tag }}
+                {{ form.lastname}}
+            </div>
+            <div class="form-group">
+                {{ form.expert.label_tag }}
+                {{ form.expert}}
+            </div>
+            <div class="form-group">
+                {{ form.experience.label_tag }}
+                {{ form.experience}}
+            </div>
+            <div class="form-group">
+                {{ form.user.label_tag }}
+                {{ form.user}}
+            </div>
+            <div class="form-group">
+                {{ form.categories.label_tag }}
+                {{ form.categories}}
+            </div>
+            <button type="submit" class="btn btn-dark text-white" style="max-width: 100px;">update</button> 
+        </form>
+    </div>
  </div>
 {% endblock %}

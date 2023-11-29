@@ -1,5 +1,4 @@
 from django.urls import path
-from django.contrib.auth.forms import AuthenticationForm
 from . import views
 
 app_name = 'account'

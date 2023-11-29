@@ -8,6 +8,8 @@ from .forms import StaffForm
 from account.models import CustomUser
 from django.urls import reverse
 from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect, Http404
+
 
 # Create your views here.
 class HomeView(View):
@@ -76,26 +78,35 @@ class ProfileUpdateView(View):
     template_name="home/profileupdate.html"
     
     def dispatch(self, request, *args, **kwargs):
-        if request.user.is_authenticated:
+        if request.method=='GET' and request.user.is_authenticated:
             user_id=request.user.id
             return self.get(request,user_id)
+        if request.method=='POST' and request.user.is_authenticated:
+            user_id=request.user.id
+            return self.post(request,user_id)
+            # return super().dispatch(request,user_id, *args, **kwargs)
         return super().dispatch(request, *args, **kwargs)
-    
 
     def get(self, request, user_id):
         staff=Staff.objects.get(user_id=user_id)
         form=StaffForm(instance=staff)
         return render(request,self.template_name,{'form':form})
+        
     
     def post(self, request,user_id):
         staff=Staff.objects.get(user_id=user_id)
-        staff_form = self.staff_form(request.POST,instance=staff)
-        if staff_form.is_valid():
-            staff_form.save()
+        form = self.staff_form(request.POST,instance=staff)
+        print(1)
+        if form.is_valid():
+            form.save()
             messages.success(request, f"update successfully", "success")
-            return redirect("home:home")
+            print(2)
+            # return redirect("home:home")
+            return HttpResponseRedirect(reverse('home:staffpdetail'))
         else:
+            print(3)
             messages.warning(request,"check your input data","warning")
+        return render(request, self.template_name, {'form': form})
 
             
 class StaffDeleteView(View):

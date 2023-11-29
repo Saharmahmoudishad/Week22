@@ -8,7 +8,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from account.models import CustomUser
 from django.http import HttpResponseRedirect
 import hashlib
-from django.contrib.auth.models import User, Permission
+# from django.contrib.auth.models import User, Permission
 
 
 # Create your views here.
