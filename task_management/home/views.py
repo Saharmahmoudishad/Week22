@@ -1,3 +1,5 @@
+from typing import Any
+from django.db.models.query import QuerySet
 from django.shortcuts import render,redirect
 from django.views import View
 from .models import Category,Staff
@@ -5,7 +7,8 @@ from account.models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
 from .forms import StaffForm
-
+from account.models import CustomUser
+from django.views.generic.list import ListView
 
 # Create your views here.
 class HomeView(View):
@@ -17,40 +20,43 @@ class HomeView(View):
     def post(self, request):
         return render(request, 'home/home.html')
     
-class StaffProfileView(View):
+class StaffPdetailView(View):
     staff_form=StaffForm
-    template_name="home/staffprofile.html"
-    
+    template_name="home/staffpdetail.html"
+
     def dispatch(self, request, *args, **kwargs):
-        if request.method=='GET':
-           if request.user.is_authenticated:
+        if request.user.is_authenticated:
             user_id=request.user.id
-            return self.get(request,user_id,show=True)
-        return self.get(request,user_id,show=False)
+            return self.get(request,user_id)
+        return super().dispatch(request, *args, **kwargs)
 
-    def get(self, request, user_id , show):
-        if show ==True:
-           user= CustomUser.objects.get(id=user_id)
-           staff = Staff.objects.get(user_id=user_id)
-           context = {
-            'user': user,
-            'staff': staff,
-           }
-           return render(request,"home/staffdetail.html",context)
-        else:
-            staff=Staff.objects.get(user_id=user_id)
-            form=StaffForm(instance=staff)
-            return render(request,self.template_name,{'form':form})
+    
+    def get(self, request, user_id):
+        if user_id:
+            user= CustomUser.objects.get(id=user_id)
+            staff = Staff.objects.get(user_id=user_id)
+            context = {
+             'user': user,
+             'staff': staff,
+            }
+            return render(request,self.template_name,context)
+        messages.warning(request,"your not access to staff of Ada company profile","warning")
 
-    def post(self, request,user_id):
-        staff=Staff.objects.get(user_id=user_id)
-        staff_form = self.staff_form(request.POST,instance=staff)
-        if staff_form.is_valid():
-            staff_form.save()
-            messages.success(request, f"update successfully", "success")
-            return redirect("home:home")
-        else:
-            messages.warning(request,"check your input data","warning")
+        
+        
+    # def get(self, request, user_id):
+    #     if request.user.is_authenticated:
+    #         if request.user.has_category_permission(user_id):
+    #             user= CustomUser.objects.get(id=user_id)
+    #             staff = Staff.objects.get(user_id=user_id)
+    #             context = {
+    #              'user': user,
+    #              'staff': staff,
+    #             }
+    #             return render(request,"home/staffdetail.html",context)
+    #         staff=Staff.objects.get(user_id=user_id)
+    #         form=StaffForm(instance=staff)
+    #         return render(request,self.template_name,{'form':form})
 
 
 class CategoryDetailView(View):
@@ -64,5 +70,29 @@ class CategoryDetailView(View):
             'user': request.user
         }
         return render(request, 'home/categorydetail.html', context)
+    
 
+class ProfileUpdateView(View):
+    staff_form=StaffForm
+    template_name="home/profileupdate.html"
+    
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            return redirect('home:home')
+        return super().dispatch(request, *args, **kwargs)
+    
 
+    def get(self, request, user_id):
+        staff=Staff.objects.get(user_id=user_id)
+        form=StaffForm(instance=staff)
+        return render(request,self.template_name,{'form':form})
+    
+    def post(self, request,user_id):
+        staff=Staff.objects.get(user_id=user_id)
+        staff_form = self.staff_form(request.POST,instance=staff)
+        if staff_form.is_valid():
+            staff_form.save()
+            messages.success(request, f"update successfully", "success")
+            return redirect("home:home")
+        else:
+            messages.warning(request,"check your input data","warning")

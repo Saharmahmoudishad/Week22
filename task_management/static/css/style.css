@@ -4,7 +4,9 @@
     box-sizing: border-box;
 }
 header {
-  background-color: #a3a3a3;
+  background: linear-gradient(to bottom, #67448e, #0F2B52);
+  background-blend-mode: multiply;
+  /* background-color: #a3a3a3; */
   padding: 10px;
 }
 
@@ -15,11 +17,16 @@ img {
   padding: 0;
 }
 body {
-  background-color: #032a5d;
+  background-image: url('/static/image/background.jpg');
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat;
+  /* background-color: #032a5d; */
   font-family: 'Arial', sans-serif;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  margin: 0;
 }
 
 .specialscolor {
@@ -39,9 +46,9 @@ label {
   color: #888; 
 }
 
-.row-form{
+/* .row-form{
 background-color: #555657;
-}
+} */
 
 .container {
   flex: 1;
@@ -50,30 +57,42 @@ background-color: #555657;
 
 .card {
   font-family: 'Times New Roman', Times, serif;
-  background-color: #555657;
+  background-color: rgba(137, 202, 224, 0.7);
+  /* background-color: #57718b; */
   color: #000000 ; 
   margin-top: 40px;
   margin-bottom: 20px;
   justify-content: center;
 }
 .card-img-top {
-  margin:auto ;
   max-width: 350px;
   max-height: 250px;
+  margin: auto; 
 }
+
 .bg-taupe {
   background-color:rgb(79, 100, 103) ;
 }
 
+.footer-image {
+  bottom: 0!important;
+  left: 0!important;
+  max-width: 150px; 
+  max-height: 150px; 
+  margin: 0px !important;
+
+}
+
 .footer {
-    background-color: #a3a3a3;
-    font-family:SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
-    font-size: 10px;
-    text-align: center;
-    color: #000000 ;
-    padding: 10px;
-    max-height: 10vh;
-    margin-bottom:0;
+  font-family:SF Pro Display,SF Pro Icons,Helvetica Neue,Helvetica,Arial,sans-serif;
+  font-size: 10px;
+  text-align: center;
+  color: #000000 ; 
+  background: linear-gradient(to bottom, #67448e, #384d6c);
+  /* background-color: #a3a3a3; */
+  padding: 10px;
+  max-height: 15vh;
+  margin-bottom:0;
 }
 @media (max-width: 768px){
     footer{

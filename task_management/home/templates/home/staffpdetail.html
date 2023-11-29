@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} {{staff.lastname}} profile{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <img src="{% static 'image/staff.jpg' %}" class="card-img-top" alt="...">
+    </div>
+    <div class="row">
+        <div class="card border-primary text-center col-md-12 m-2">
+            <div class="card-header border-primary pd-5 m-2"><h2 class="card-title">Personal Data</h2></div>
+            <p><strong>First Name:</strong> {{ staff.firstname }}</p>
+            <p><strong>Last Name:</strong> {{ staff.lastname }}</p>
+            <p><strong>National Code:</strong> {{ staff.user.nationalcode }}</p>
+            <p><strong>Email:</strong> {{ staff.user.email }}</p>
+            <p><strong>Address:</strong> {{ staff.user.adress }}</p>
+            <p><strong>Date of Birth:</strong> {{ staff.user.date_of_birth }}</p>
+        </div>
+        <div class="card border-primary text-center  col-md-12 m-2">
+            <div class="card-header border-primary m-2"><h2 class="card-title">About Expertise</h2></div>
+            <p><strong>Expertise:</strong> {{ staff.expert }}</p>
+            <p><strong>Experience:</strong> {{ staff.experience }} years</p>
+            <p><strong>Category:</strong> {{ staff.categories.title }}</p>
+        </div>
+    </div>
+  </div>
+{% endblock %}

@@ -38,7 +38,7 @@ class UserRegisterView(View):
             )
             messages.success(request, "your registered successfully", "success")
             user_id=new_user.id
-            staffprofile_url = reverse('home:staffprofile', args=[user_id])
+            staffprofile_url = reverse('home:ProfileUpdate', args=[user_id])
             return redirect( staffprofile_url)
         return render(request, self.template_name, {'form': form})
 

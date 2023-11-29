@@ -1,52 +1,51 @@
 {% extends 'base.html' %}
 {% block title %} Register {% endblock %}
 {% block content %}
- <div class="row-form m-2 p-2">
-     <div class="card col-md-6">
-         <h2 class="m-3 text-white">Register form</h2>
-         <form action="" method="post" novalidate>
-             {% csrf_token %}
-             {% comment %} <div class="form-group">
-                 {{ form.username.label_tag }}
-                 {{ form.username }}
-                 {{ form.username.errors }}
-                 <small class="form-text text-muted">{{ form.username.help_text }}</small>
-             </div> {% endcomment %}
-            <div class="form-group vol-md-6">
-                 {{ form.nationalcode.label_tag }}
-                 {{ form.nationalcode }}
-                 {{ form.nationalcode.errors }}
-                 <small class="form-text text-muted">{{ form.email.help_text }}</small>
-             </div>
-             <div class="form-group">
-                 {{ form.password.label_tag }}
-                 {{ form.password }}
-             </div>
-             <div class="form-group">
-                 {{ form.password2.label_tag }}
-                 {{ form.password2 }}
-                 {{ form.password2.errors }}
-             </div>
-             <div class="form-group vol-md-6">
-                 {{ form.email.label_tag }}
-                 {{ form.email }}
-                 {{ form.email.errors }}
-                 <small class="form-text text-muted">{{ form.email.help_text }}</small>
-             </div>
-            <div class="form-group vol-md-6">
-                 {{ form.date_of_birth.label_tag }}
-                 {{ form.date_of_birth }}
-                 {{ form.adress.errors }}
-             </div> 
-             <div class="form-group vol-md-6">
-                 {{ form.adress.label_tag }}
-                 {{ form.adress }}
-                 {{ form.adress.errors }}
-             </div> 
-             <button type="submit" class="btn btn-primary btn-sm btn-block" style="max-width: 100px;">Register</button>
-             <a href="{% url 'account:User_login' %}" class="sing_up_sign_in" target="_self">sign in with your account</a>
-         </form>
-     </div>
- </div>
- 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="card col-md-8">
+            <h2 class="card border-primary m-3 text-white text-center" style="background-color: #032a5d;">Register form</h2>
+            <form action="" method="post" novalidate>
+                {% csrf_token %}
+                {% comment %} <div class="form-group">
+                    {{ form.username.label_tag }}
+                    {{ form.username }}
+                    {{ form.username.errors }}
+                    <small class="form-text text-muted">{{ form.username.help_text }}</small>
+                </div> {% endcomment %}
+               <div class="form-group vol-md-6">
+                    {{ form.nationalcode.label_tag }}
+                    {{ form.nationalcode }}
+                    {{ form.nationalcode.errors }}
+                    <small class="form-text text-muted">{{ form.email.help_text }}</small>
+                </div>
+                <div class="form-group">
+                    {{ form.password.label_tag }}
+                    {{ form.password }}
+                    {{ form.password2.label_tag }}
+                    {{ form.password2 }}
+                    {{ form.password2.errors }}
+                </div>
+                <div class="form-group vol-md-6">
+                    {{ form.email.label_tag }}
+                    {{ form.email }}
+                    {{ form.email.errors }}
+                    <small class="form-text text-muted">{{ form.email.help_text }}</small>
+                </div>
+               <div class="form-group vol-md-6">
+                    {{ form.date_of_birth.label_tag }}
+                    {{ form.date_of_birth }}
+                    {{ form.adress.errors }}
+                </div> 
+                <div class="form-group vol-md-6">
+                    {{ form.adress.label_tag }}
+                    {{ form.adress }}
+                    {{ form.adress.errors }}
+                </div> 
+                <button type="submit" class="btn btn-primary btn-sm btn-block" style="max-width: 100px;">Register</button>
+                <a href="{% url 'account:User_login' %}" class="sing_up_sign_in" target="_self" style="color: white;">sign in with your account</a>
+            </form>
+        </div>
+    </div>
+</div> 
 {% endblock %}

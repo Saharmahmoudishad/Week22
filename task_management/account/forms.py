@@ -14,7 +14,7 @@ class UserRegisterForm(forms.Form):
     #                            error_messages={
     #                                'unique': "A user with that username already exists.",
     #                            }, )
-    nationalcode = forms.CharField(help_text="Please enter a valid NationalCode")
+    nationalcode = forms.CharField(widget=forms.TimeInput(attrs={'placeholder':'national code'}), help_text="Please enter a valid NationalCode",label='National Code',)
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
     password2 = forms.CharField(label="confirm password", widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "specialscolor"}),
