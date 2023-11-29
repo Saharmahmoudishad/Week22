@@ -23,7 +23,8 @@
             <p><strong>Expertise:</strong> {{ staff.expert }}</p>
             <p><strong>Experience:</strong> {{ staff.experience }} years</p>
             <p><strong>Category:</strong> {{ staff.categories.title }}</p>
-        </div>
+            <a href="{% url 'home:ProfileUpdate' staff.user_id %}" style="color:blue ;font-size: 18px;">detail</a>
+            </div>
     </div>
   </div>
 {% endblock %}

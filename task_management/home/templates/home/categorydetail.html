@@ -15,6 +15,9 @@
           {% if user.is_authenticated and user.id == staff_member.user.id %}
           <button type="button" class="btn btn-light"><a href="{% url 'home:staffpdetail' %}">detail</a></button>
           {% endif %}
+          {% if user.is_admin or user.is_authenticated and user.id == staff_member.user.id %}
+          <button type="button" class="btn btn-light"><a href="{% url 'home:staffdelete' staff_member.user_id %}">delete</a></button>
+          {% endif %}
         </div>
       </div>
     {% endfor %}

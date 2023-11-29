@@ -2,8 +2,8 @@
 {% block title %} login{% endblock %}
 {% block content %}
  <div class="row-form m-2 p-2">
-     <div class="col-md-6">
-         <h2 class="m-3 text-white">Please fill in the blank of profile form </h2>
+     <div class="card border-primary text-center col-md-8">
+         <h3 class="card border-primary m-3 text-white" style="background-color: #032a5d;">Please fill in the blank of profile form </h3>
          <form action="" method="post" novalidate autocomplete="off">
              {% csrf_token %}
              <div class="form-group">
@@ -30,9 +30,7 @@
                  {{ form.categories.label_tag }}
                  {{ form.categories}}
              </div>
-             <a href="{% url 'account:User_login' %}" class="sing_up_sign_in" target="_self">
-             <button type="submit" class="btn btn-primary btn-sm btn-block" style="max-width: 100px;">update</button>
-             </a>
+             <button type="submit" class="btn btn-dark text-white" style="max-width: 100px;"><a href="{% url 'account:User_login' %}" target="_self">update</a></button> 
          </form>
      </div>
  </div>

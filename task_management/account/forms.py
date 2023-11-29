@@ -14,15 +14,15 @@ class UserRegisterForm(forms.Form):
     #                            error_messages={
     #                                'unique': "A user with that username already exists.",
     #                            }, )
-    nationalcode = forms.CharField(widget=forms.TimeInput(attrs={'placeholder':'national code'}), help_text="Please enter a valid NationalCode",label='National Code',)
-    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
-    password2 = forms.CharField(label="confirm password", widget=forms.PasswordInput(attrs={"class": "specialscolor"}))
-    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "specialscolor"}),
+    nationalcode = forms.CharField(widget=forms.TimeInput(attrs={"class": "specialscolor",'placeholder':'Enter your national code'}), help_text="Please enter a valid NationalCode",label='National Code',)
+    password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor",'placeholder':'Enter your password'}))
+    password2 = forms.CharField(label="confirm password", widget=forms.PasswordInput(attrs={"class": "specialscolor",'placeholder':'confirm password'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={"class": "specialscolor",'placeholder':'Enter Email adress'}),
                              help_text="Please enter a valid email address.", )
     date_of_birth = forms.DateField(widget=forms.SelectDateWidget(years=range(1920, 2023)), 
     label='Date of Birth', required=True, 
     input_formats=['%Y-%m-%d', '%m/%d/%Y', '%m/%d/%y'],)
-    adress = forms.CharField(widget=forms.Textarea(attrs={"class": "specialscolor"}))
+    adress = forms.CharField(widget=forms.Textarea(attrs={'placeholder':'Enter your Adress'}))
 
 
     def clean_email(self):
@@ -64,7 +64,7 @@ class UserRegisterForm(forms.Form):
 
 
 class UserLoginForm(forms.Form):
-    nationalcode = forms.CharField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off"}),help_text="Please enter a valid nationalcode of email address.")
+    nationalcode = forms.CharField(widget=forms.TextInput(attrs={"class": "specialscolor", "autocomplete": "off"}),help_text="Please enter a valid nationalcode of email address.",label='National Code or Email Adress')
     password = forms.CharField(widget=forms.PasswordInput(attrs={"class": "specialscolor", "autocomplete": "off"}),
                                help_text="forgot your "
                                          "password", )

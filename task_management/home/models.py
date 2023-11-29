@@ -10,7 +10,7 @@ class Category(models.Model):
     employe_rewards = models.CharField(max_length=250, choices=[("To","Time off"),("G","Gifts"),("WH","Work from home days"),("Gc","Gift cards"),("C","Certificates")],default="None")
 
     def __str__(self):
-       return f"{self.title}"   
+       return f"{self.title}"  
     
 
 class Staff(models.Model):
