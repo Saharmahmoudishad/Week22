@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} {{ category_name }} {% endblock %}
+{% block content %}
+   {% for category in categories %}
+      <h1 class="card bg-primary col-md-12 mb-12 m-3 p-3 text-center mx-auto">{{ category.title }}</h1>
+      <span class="border-0">
+      <div class="row">
+         {% for project in all_project %}
+            <div class="col-md-3 mb-4">
+            <div class="card border-primary mb-3 pd-5 m-2">
+               <p class="card-text m-3">Title: {{ project.title }}</p>
+               <p class="card-text m-3">Constructing party: {{ project.constracting_party }} years</p>
+               <p class="card-text m-3">work_in_progress: {{ project.constracting_party }} years</p>
+                  {% if log_staff_category == category %}
+                      <p class="card-text m-3">Delay: {{ project.delay }} years</p>
+                      <p class="card-text m-3">Cost: {{ project.cost }} years</p>
+                      <p class="card-text m-3">started: {{ project.started }} years</p>
+                      <p class="card-text m-3">deadline: {{ project.deadline }} years</p>
+                      <a href="{% url 'activity:project_update' project.id %}">Edite projects</a>
+                       <a href="{% url 'activity:project_add'%}">Add new projects</a>
+                  {% endif %}
+            </div>
+            </div>
+         {% endfor %}
+      </div>
+{% endfor %}
+{% endblock %}

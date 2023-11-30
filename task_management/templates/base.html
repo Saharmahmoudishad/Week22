@@ -25,9 +25,10 @@
                         <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   MENU</button>
                         <div class="dropdown-menu " aria-labelledby="dropdownMenu2">
+                            <button class="dropdown-item" type="button"><a href="{% url 'activitys:all_project' %}" target="_self">Ada Projects</a></button>
                             <button class="dropdown-item" type="button"><a href="{%url 'home:about_us' %}">about us</a></button>
                             <button class="dropdown-item" type="button"><a href="{%url 'home:contact_us' %}">contact us</a></button>
-                            <button class="dropdown-item" type="button"><a style="color:black; text-decoration:none" href="{% url 'account:User_logout' %}" type="submit" target="_self">User Logout</a></button>
+                            <button class="dropdown-item" type="button"><a style="color:black; text-decoration:none" href="{% url 'account:User_logout' %}" >User Logout</a></button>
                         </div>
                     </div>
                 </div>

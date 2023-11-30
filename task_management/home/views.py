@@ -1,6 +1,6 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render, redirect
 from django.views import View
-from .models import Category,Staff
+from .models import Category, Staff
 from account.models import CustomUser
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib import messages
@@ -8,7 +8,7 @@ from .forms import StaffForm
 from account.models import CustomUser
 from django.urls import reverse
 from django.views.generic import TemplateView
-from django.http import HttpResponseRedirect, Http404
+from django.http import HttpResponseRedirect
 
 
 # Create your views here.
@@ -20,33 +20,31 @@ class HomeView(View):
 
     def post(self, request):
         return render(request, 'home/home.html')
-    
+
+
 class StaffPdetailView(View):
-    staff_form=StaffForm
-    template_name="home/staffpdetail.html"
+    staff_form = StaffForm
+    template_name = "home/staffpdetail.html"
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            user_id=request.user.id
-            return self.get(request,user_id)
-        return super().dispatch(request,user_id=None, *args, **kwargs)
+            user_id = request.user.id
+            return self.get(request, user_id)
+        return super().dispatch(request, user_id=None, *args, **kwargs)
 
-    
     def get(self, request, user_id):
         if user_id:
-            user= CustomUser.objects.get(id=user_id)
+            user = CustomUser.objects.get(id=user_id)
             staff = Staff.objects.get(user_id=user_id)
             context = {
-             'user': user,
-             'staff': staff,
+                'user': user,
+                'staff': staff,
             }
-            return render(request,self.template_name,context)
+            return render(request, self.template_name, context)
         else:
             return redirect('home:home')
-        messages.warning(request,"your not access to staff of Ada company profile","warning")
+        messages.warning(request, "your not access to staff of Ada company profile", "warning")
 
-        
-        
     # def get(self, request, user_id):
     #     if request.user.is_authenticated:
     #         if request.user.has_category_permission(user_id):
@@ -63,8 +61,8 @@ class StaffPdetailView(View):
 
 
 class CategoryDetailView(View):
-    
-    def get(self, request,title):
+
+    def get(self, request, title):
         category = Category.objects.get(title=title)
         staffs = Staff.objects.filter(categories=category)
         context = {
@@ -73,32 +71,30 @@ class CategoryDetailView(View):
             'user': request.user
         }
         return render(request, 'home/categorydetail.html', context)
-    
+
 
 class ProfileUpdateView(View):
-    staff_form=StaffForm
-    template_name="home/profileupdate.html"
-    
+    staff_form = StaffForm
+    template_name = "home/profileupdate.html"
+
     def dispatch(self, request, *args, **kwargs):
-        if request.method=='GET' and request.user.is_authenticated:
-            user_id=request.user.id
-            return self.get(request,user_id)
-        if request.method=='POST' and request.user.is_authenticated:
-            user_id=request.user.id
-            return self.post(request,user_id)
+        if request.method == 'GET' and request.user.is_authenticated:
+            user_id = request.user.id
+            return self.get(request, user_id)
+        if request.method == 'POST' and request.user.is_authenticated:
+            user_id = request.user.id
+            return self.post(request, user_id)
             # return super().dispatch(request,user_id, *args, **kwargs)
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, user_id):
-        staff=Staff.objects.get(user_id=user_id)
-        form=StaffForm(instance=staff)
-        return render(request,self.template_name,{'form':form})
-        
-    
-    def post(self, request,user_id):
-        staff=Staff.objects.get(user_id=user_id)
-        form = self.staff_form(request.POST,instance=staff)
-        print(1)
+        staff = Staff.objects.get(user_id=user_id)
+        form = StaffForm(instance=staff)
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request, user_id):
+        staff = Staff.objects.get(user_id=user_id)
+        form = self.staff_form(request.POST, instance=staff)
         if form.is_valid():
             form.save()
             messages.success(request, f"update successfully", "success")
@@ -107,30 +103,32 @@ class ProfileUpdateView(View):
             return HttpResponseRedirect(reverse('home:staffpdetail'))
         else:
             print(3)
-            messages.warning(request,"check your input data","warning")
+            messages.warning(request, "check your input data", "warning")
         return render(request, self.template_name, {'form': form})
 
-            
+
 class StaffDeleteView(View):
-    
+
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_authenticated:
-            user_id=request.user.id
+            user_id = request.user.id
             return self.get(request, user_id)
         return super().dispatch(request, *args, **kwargs)
 
     def get(self, request, user_id):
-        staff=Staff.objects.get(user_id=user_id)
-        print(1)
-        title=staff.categories.title
-        staff.delete() 
-        print(1)
-        url=reverse("home:categorydetail",args=[title])
+        staff = Staff.objects.get(user_id=user_id)
+        user = CustomUser.objects.get(user_id=user_id)
+
+        title = staff.categories.title
+        staff.delete()
+        user.delete()
+        url = reverse("home:categorydetail", args=[title])
         return redirect(url)
-    
+
 
 class AboutUsView(TemplateView):
     template_name = 'about_us.html'
+
 
 class ContactUsView(TemplateView):
     template_name = 'contact_us.html'
