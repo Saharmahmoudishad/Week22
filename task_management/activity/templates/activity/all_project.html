@@ -18,11 +18,16 @@
                       <p class="card-text m-3">started: {{ project.started }} years</p>
                       <p class="card-text m-3">deadline: {{ project.deadline }} years</p>
                       <a href="{% url 'activity:project_update' project.id %}">Edite projects</a>
-                       <a href="{% url 'activity:project_add'%}">Add new projects</a>
                   {% endif %}
             </div>
             </div>
          {% endfor %}
       </div>
+       {% if log_staff_category == category %}
+       <div class="card col-md-12 mb-12 m-3 p-3 text-center mx-auto" style="color: black;font-size: larger;">
+         <a href="{% url 'activity:project_add'%}">Add new projects </a>
+       </div>
+
+       {% endif %}
 {% endfor %}
 {% endblock %}
