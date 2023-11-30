@@ -94,15 +94,15 @@ class ProfileUpdateView(View):
 
     def post(self, request, user_id):
         staff = Staff.objects.get(user_id=user_id)
-        form = self.staff_form(request.POST, instance=staff)
+        form = self.staff_form(request.POST, request.FILES, instance=staff)
         if form.is_valid():
-            form.save()
+            a = form.save()
             messages.success(request, f"update successfully", "success")
-            print(2)
+
             # return redirect("home:home")
             return HttpResponseRedirect(reverse('home:staffpdetail'))
         else:
-            print(3)
+
             messages.warning(request, "check your input data", "warning")
         return render(request, self.template_name, {'form': form})
 

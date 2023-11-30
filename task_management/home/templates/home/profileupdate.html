@@ -4,7 +4,7 @@
  <div class="row justify-content-center m-2 p-2">
     <div class="card border-primary text-center col-md-8">
         <h3 class="card border-primary m-3 text-white" style="background-color: #032a5d;">Please fill in the blank of profile form </h3>
-        <form method="post" novalidate autocomplete="off">
+        <form method="post" enctype="multipart/form-data" novalidate autocomplete="off">
             {% csrf_token %}
             <div class="form-group">
                 {{ form.firstname.label_tag }}
@@ -29,6 +29,11 @@
             <div class="form-group">
                 {{ form.categories.label_tag }}
                 {{ form.categories}}
+            </div>
+            <div>
+                <label for="{{ form.profile_image.id_for_label }}">Image:</label>
+                {{ form.profile_image }}
+                {{ form.profile_image.errors}}
             </div>
             <button type="submit" class="btn btn-dark text-white" style="max-width: 100px;">update</button> 
         </form>

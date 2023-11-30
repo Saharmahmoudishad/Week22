@@ -1,5 +1,13 @@
 from django.db import models
 from account.models import CustomUser
+import os, uuid
+
+
+# def user_image_file_path(instance, filename: str):
+#     """generate file path for user profile image"""
+#     ext = filename.split('.')[-1]
+#     filename = f'{uuid.uuid4()}.{ext}'
+#     return os.path.join('uploads/user/', filename)
 
 
 # Create your models here.
@@ -20,6 +28,7 @@ class Staff(models.Model):
     experience = models.IntegerField(null=True, default=None)
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     categories = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='staff', null=True, default=None)
+    profile_image = models.ImageField(upload_to='images/', blank=True, null=True)
 
     def __str__(self):
         return f"{self.firstname} {self.lastname} in {self.categories.title}"

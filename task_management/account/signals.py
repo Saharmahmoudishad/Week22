@@ -17,6 +17,5 @@ def record_login(sender, request, user, **kwargs):
 User = get_user_model()
 @receiver(post_save, sender=CustomUser)
 def create_staffprofile(sender, instance, created, **kwargs):
-    
     if created:
         Staff.objects.create(user=instance)
